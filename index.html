@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Etalase Hijau</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(120deg, #e3fce7, #f9fff9);
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 600;
+    }
+
+    .container {
+      padding: 2rem;
+      animation: slideUp 0.5s ease-in-out;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #2e7d32;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      cursor: pointer;
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.18);
+    }
+
+    .product-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .product-info {
+      padding: 1rem;
+    }
+
+    .product-info h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.1rem;
+      color: #2e7d32;
+    }
+
+    .product-info p {
+      margin: 0;
+      color: #555;
+    }
+
+    .product-detail {
+      display: none;
+    }
+
+    .product-detail.active {
+      display: block;
+      animation: slideUp 0.5s ease-in-out;
+    }
+
+    .detail-layout {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+
+    .detail-layout img {
+      width: 300px;
+      border-radius: 12px;
+    }
+
+    .detail-layout a {
+      display: inline-block;
+      background: #2e7d32;
+      color: white;
+      padding: 0.6rem 1.2rem;
+      text-decoration: none;
+      border-radius: 6px;
+      margin-top: 1rem;
+      transition: background 0.3s;
+    }
+
+    .detail-layout a:hover {
+      background: #256428;
+    }
+
+    .seller {
+      margin-top: 1rem;
+      color: #444;
+    }
+
+    .back-button {
+      margin: 1rem 0;
+      display: inline-block;
+      color: #2e7d32;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .about {
+      margin-top: 3rem;
+      padding: 2rem;
+      background: #f1f8f2;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      color: #2e7d32;
+    }
+
+    .about h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .store-image {
+      margin-top: 2rem;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Etalase Hijau</h1>
+    <div>Menu</div>
+  </header>
+
+  <div class="container" id="lobby">
+    <h2>Produk Unggulan</h2>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+
+  <div class="container product-detail" id="productDetail"></div>
+
+  <div class="container about">
+    <h3>Tentang Kami</h3>
+    <p>Etalase Hijau adalah usaha UMKM yang bergerak di bidang sembako, menyediakan berbagai kebutuhan pokok seperti beras, gula, minyak, mie instan, dan kebutuhan rumah tangga lainnya dengan harga terjangkau. Berlokasi di Tulang Bawang, Lampung, kami melayani kebutuhan masyarakat dengan pelayanan ramah dan cepat.</p>
+    <img class="store-image" src= "foto toko.jpg" alt="Foto Toko Etalase Hijau">
+  </div>
+
+  <script>
+    const products = [
+      { name: "Telur Ayam", price: "Rp30.000/kg", img: "telur.jpg" },
+      { name: "Tepung Terigu Segitiga Biru", price: "12.000/kg", img: "tepung terigu.jpg" },
+      { name: "Indomie Goreng", price: "Rp3.000/bungkus", img: "indomie goreng.jpg" },
+      { name: "Minyak Goreng Fortune", price: "Rp20.000/liter", img: "minyak goreng.jpg" },
+      { name: "Beras Ramos", price: "Rp15.000/kg", img: "beras-ramos.jpg" },
+      { name: "Gula Pasir Madu", price: "Rp17.000/kg", img: "gula murni.jpg" },
+      { name: "Soklin liquid", price: "Rp2.500/bungkus", img: "soklin.jpg" },
+      { name: "Sabun Lifebuoy", price: "Rp18.000/botol", img: "lifebuoy.jpg" },
+      { name: "Molto", price: "Rp15.000/bungkus", img: "molto.jpg" },
+      { name: "Kopi Kapal Api", price: "Rp2.000/saset", img: "kopii.jpg" },
+      { name: "Susu Dancow", price: "Rp38.000/box", img: "dancow.jpg" },
+      { name: "Garam Refina", price: "Rp5.000/pack", img: "garam refina.jpg" },
+      { name: "Sikat Gigi Formula", price: "Rp4.000/buah", img: "sikat gigi.jpg" },
+      { name: "Marina", price: "Rp15.000/botol", img: "marina.jpg" },
+      { name: "Garnier", price: "Rp32.000/botol", img: "garnier.jpg" }
+    ];
+
+    const productGrid = document.getElementById("productGrid");
+    const productDetail = document.getElementById("productDetail");
+
+    products.forEach((p, i) => {
+      const card = document.createElement("div");
+      card.className = "product-card";
+      card.innerHTML = `
+        <img src="${p.img}" alt="${p.name}" />
+        <div class="product-info">
+          <h3>${p.name}</h3>
+          <p>${p.price}</p>
+        </div>
+      `;
+      card.onclick = () => showDetail(i);
+      productGrid.appendChild(card);
+    });
+
+    function showDetail(index) {
+      document.getElementById("lobby").style.display = "none";
+      const p = products[index];
+      productDetail.innerHTML = `
+        <div class="back-button" onclick="goBack()">&larr; Kembali</div>
+        <div class="detail-layout">
+          <img src="${p.img}" alt="${p.name}" />
+          <div>
+            <h2>${p.name}</h2>
+            <p><strong>${p.price}</strong></p>
+            <p>Kabupaten Tulang Bawang, Lampung</p>
+            <p>Menyediakan berbagai macam sembako lengkap kebutuhan rumah tangga.</p>
+            <a href="https://wa.me/6285768101358?text=Halo,%20saya%20tertarik%20dengan%20produk%20${encodeURIComponent(p.name)}" target="_blank">Hubungi Penjual</a>
+            <div class="seller">Penjual: <strong>Desain Indonesia</strong></div>
+          </div>
+        </div>
+      `;
+      productDetail.classList.add("active");
+    }
+
+    function goBack() {
+      document.getElementById("lobby").style.display = "block";
+      productDetail.classList.remove("active");
+      productDetail.innerHTML = "";
+    }
+  </script>
+</body>
+</html>
